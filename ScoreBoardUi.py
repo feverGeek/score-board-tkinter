@@ -20,10 +20,16 @@ class Ui_Form:
 "color: rgb(0, 85, 255);")
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
-        self.listView = QtWidgets.QListView(Form)
-        self.listView.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.listView.setObjectName("listView")
-        self.verticalLayout.addWidget(self.listView)
+        self.model = QtGui.QStandardItemModel(0,4)
+        self.model.setHorizontalHeaderLabels(['ID', 'IP', 'Times', 'Status'])
+        self.tableView = QtWidgets.QTableView(Form)
+        self.tableView.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.tableView.setObjectName("tableView")
+        self.tableView.horizontalHeader().setStretchLastSection(True)
+        self.tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.tableView.setModel(self.model)
+        self.tableView.setEditTriggers(QtWidgets.QTableView.NoEditTriggers)#不可编辑
+        self.verticalLayout.addWidget(self.tableView)
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
@@ -61,7 +67,7 @@ class Ui_Form:
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "ScoreBoard"))
         self.label.setText(_translate("Form", "ScoreBoard"))
         self.label_2.setText(_translate("Form", "无串口"))
         self.groupBox.setTitle(_translate("Form", "串口选择"))
